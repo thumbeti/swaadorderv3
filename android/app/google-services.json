@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "919652780276",
+    "firebase_url": "https://swaadorderv3.firebaseio.com",
+    "project_id": "swaadorderv3",
+    "storage_bucket": "swaadorderv3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:919652780276:android:15ef52193694014680b6a1",
+        "android_client_info": {
+          "package_name": "com.example.swaadorderv3"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "919652780276-o5k2lnk81kpqioo31ff1q5pbt9bcn3at.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.swaadorderv3",
+            "certificate_hash": "c53ad7f691bc6dfdf57a66271ebe21cf5f7e5332"
+          }
+        },
+        {
+          "client_id": "919652780276-s5vuvq5dqh5slqcdavne45i51g60ni65.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAbH99akjnoxZnggqhjx8E9GIpvPnNFZ4Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "919652780276-s5vuvq5dqh5slqcdavne45i51g60ni65.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
