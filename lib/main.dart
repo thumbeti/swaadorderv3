@@ -1,97 +1,118 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:swaadorderv3/Cart.dart';
+import 'package:swaadorderv3/DBPlay.dart';
+import 'package:swaadorderv3/Intro.dart';
+import 'package:swaadorderv3/MenuHome.dart';
+import 'package:swaadorderv3/MenuItemDetails.dart';
+import 'package:swaadorderv3/MyOrders.dart';
+import 'package:swaadorderv3/Payment.dart';
+import 'package:swaadorderv3/SignIn.dart';
+import 'package:swaadorderv3/SignUp.dart';
 
-void main() => runApp(MyApp());
+//void main() => runApp(FirstRoute());
 
-final dummySnapshot = [
-  {"name": "Filip", "votes": 15},
-  {"name": "Abraham", "votes": 14},
-  {"name": "Richard", "votes": 11},
-  {"name": "Ike", "votes": 10},
-  {"name": "Justin", "votes": 1},
-];
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Baby Names',
-      home: MyHomePage(),
-    );
-  }
+void main() {
+  runApp(MaterialApp(
+    title: 'Navigation Basics',
+    home: FirstRoute(),
+  ));
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  _MyHomePageState createState() {
-    return _MyHomePageState();
-  }
-}
-
-class _MyHomePageState extends State<MyHomePage> {
+class FirstRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Baby Name Votes')),
-      body: _buildBody(context),
-    );
-  }
-
-  Widget _buildBody(BuildContext context) {
-    // TODO: get actual snapshot from Cloud Firestore
-    //return _buildList(context, dummySnapshot);
-    return StreamBuilder<QuerySnapshot>(
-      stream: Firestore.instance.collection('baby').snapshots(),
-      builder: (context, snapshot) {
-        if (!snapshot.hasData) return LinearProgressIndicator();
-
-        return _buildList(context, snapshot.data.documents);
-      },
-    );
-  }
-
-  Widget _buildList(BuildContext context, List<DocumentSnapshot> snapshot) {
-    return ListView(
-      padding: const EdgeInsets.only(top: 20.0),
-      children: snapshot.map((data) => _buildListItem(context, data)).toList(),
-    );
-  }
-
-  Widget _buildListItem(BuildContext context, DocumentSnapshot data) {
-    final record = Record.fromSnapshot(data);
-
-    return Padding(
-      key: ValueKey(record.name),
-      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
-      child: Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(5.0),
-        ),
-        child: ListTile(
-          title: Text(record.name),
-          trailing: Text(record.votes.toString()),
-          onTap: () => print(record),
+      appBar: AppBar(
+        title: Text('First Route'),
+      ),
+      body: Center(
+        child: Column(
+          children: <Widget>[
+            RaisedButton(
+              child: Text('DB Play'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => DBPlay()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('Intro'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Intro()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('SignUp'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignUp()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('SingIn'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SignIn()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('MenuHome'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MenuHome()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('Menu item details'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MenuItemDetails()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('Cart'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Cart()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('My Oders'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyOrders()),
+                );
+              },
+            ),
+            RaisedButton(
+              child: Text('Payment'),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Payment()),
+                );
+              },
+            ),
+          ],
         ),
       ),
     );
   }
 }
 
-class Record {
-  final String name;
-  final int votes;
-  final DocumentReference reference;
-
-  Record.fromMap(Map<String, dynamic> map, {this.reference})
-      : assert(map['name'] != null),
-        assert(map['votes'] != null),
-        name = map['name'],
-        votes = map['votes'];
-
-  Record.fromSnapshot(DocumentSnapshot snapshot)
-      : this.fromMap(snapshot.data, reference: snapshot.reference);
-
-  @override
-  String toString() => "Record<$name:$votes>";
-}
